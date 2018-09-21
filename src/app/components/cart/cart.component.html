@@ -1,0 +1,62 @@
+<div id="breadcrumbs">
+		<div class="container">
+			<ul>
+				<li><a href="#">Home</a></li>
+				<li>Cart</li>
+			</ul>
+		</div>
+		<!-- / container -->
+	</div>
+	<!-- / body -->
+
+<div id="body">
+		<div class="container">
+			<div id="content" class="full">
+				<div class="cart-table">
+					<table>
+						<tr id="trCartTable">
+							<th class="items" id="trCartTable">Items</th>
+							<th class="price" id="trCartTable">Price</th>
+							<th class="qnt" id="trCartTable">Quantity</th>
+							<th class="total" id="trCartTable">Total</th>
+							<th class="delete" id="trCartTable"></th>
+						</tr>
+						<tr *ngFor='let product of products'>
+							<td class="items">
+								<div >
+									<a routerLink='/product/{{product.database}}/{{product.collection}}/{{product.title}}'><img src="{{product.image}}"  alt=""></a>
+								</div>
+								<h3><a routerLink='/product/{{product.database}}/{{product.collection}}/{{product.title}}' id="blackFont">{{product.title}}</a></h3>
+								<p id="blackFont">{{product.description}}</p>
+							</td>
+							<td class="price" id="blackFont">${{product.cost}}</td>
+							<td class="qnt" id="blackFont">
+							
+							<mat-form-field  id='selectQuantity'>								
+								<mat-select  [(ngModel)]='product.quantity' class="choosingQuantity" name="first"  (ngModelChange)="changeQuantityOfProduct(product)" id="blackFont">							  
+								  <mat-option *ngFor="let option of quantityArray" [value]="option" >
+								    {{option}}
+								  </mat-option>							  
+							</mat-select>
+						</mat-form-field>
+					</td>
+							<td class="total" id="blackFont">${{product.cost*product.quantity }}</td>
+							<td class="delete" (click)="deleteItem(product.title)"><a  id='deleteProductFromCart' class="ico-del"></a></td>
+						</tr>
+						
+					</table>
+				</div>
+
+				<div class="total-count">
+					<h4>Subtotal: ${{totallCart.totallCost}}</h4>
+					<p>Products: {{totallCart.totallProducts}}</p>
+					<h3>Total to pay: <strong>$ {{totallCart.totallCost}}</strong></h3>
+					<a class="btn-grey" routerLink="/" id="buttonFinalizePay">Finalize and pay</a>
+				</div>
+		
+			</div>
+			<!-- / content -->
+		</div>
+		<!-- / container -->
+	</div>
+	<!-- / body -->

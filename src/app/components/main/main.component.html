@@ -1,0 +1,91 @@
+
+
+<!--<div id="slider">
+  
+    <ul>
+      <li style="background-image: url(./assets/images/dummy-6.jpg)">
+        <h3>Make your life better</h3>
+        <h2>Genuine diamonds</h2>
+        <a href="#" class="btn-more">Read more</a>
+      </li>
+      <li class="purple1" style="background-image: url(./assets/images/dummy-1.jpg)">
+        <h3>She will say “yes”</h3>
+        <h2>engagement ring</h2>
+        <a href="#" class="btn-more">Read more</a>
+      </li>
+      <li class="yellow1" style="background-image: url(./assets/images/dummy-2.jpg)">
+       <h3>You deserve to be beauty</h3>
+        <h2>golden bracelets</h2>
+        <a href="#" class="btn-more">Read more</a>
+      </li>
+    </ul>
+  </div>-->
+  <!-- / body   <div   style="background-image: url(./assets/images/dummy-6.jpg)"></div><br>-->
+<div class="container" id="sliderContent" (click)='changeSliderImage()'>
+        
+        <img id='slider1' src="{{sliderImages.current}}">
+</div>      
+
+  <div id="body">
+    
+    <div class="container">
+      
+      
+      <!--<div class="last-products">
+        <h2>Best products!</h2>
+        <section class="products">
+          <div *ngFor='let product of products'>
+          <article >
+            <img src="{{product.image}}" >
+            <h3>{{product.title}}</h3>
+            <h4>${{product.cost}}</h4>
+            <a href="cart.html" class="btn-add">Add to cart</a>
+          </article>
+          </div>
+       
+        </section>
+      </div>-->
+      <section class="quick-links">
+        <article style="background-image: url(./assets/images/fruits2.jpg)">
+          <a routerLink='/shop/food/fruitttt/' class="table">
+            <div class="cell">
+              <div class="text">
+                <h4>The most delicious</h4>
+                <hr>
+                <h3>Fresh Fruits For You!</h3>
+              </div>
+            </div>
+          </a>
+        </article>
+        <article class="red" style="background-image: url(./assets/images/shirts1.jpg)">
+          <a routerLink='/shop/clothes/shirts/' class="table">
+            <div class="cell">
+              <div class="text">
+                <h4>Best!</h4>
+                <hr>
+                <h3>Shirts</h3>
+                <hr>
+                <p>Amazing!</p>
+              </div>
+            </div>
+          </a>
+        </article>
+        <article style="background-image: url(./assets/images/pants11.jpg)">
+          <a href="#" class="table">
+            <div class="cell">
+              <div class="text">
+                <h4>For YOU Choice!</h4>
+                <hr>
+                <h3>Just Look</h3>
+              </div>
+            </div>
+          </a>
+        </article>
+      </section>
+    </div>
+    <!-- / container -->
+  </div>
+
+ 
+
+	

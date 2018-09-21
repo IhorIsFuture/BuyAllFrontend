@@ -1,20 +1,179 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+ <div><header id="header">
+    <div class="container" style="height: 100px; width: 100%;">
+      <a href="" id="logo" title="Buy ALL" style="margin-left: 25px;">Buy ALL</a>
+      <div class="right-links" style="margin-right: 25px;" >
+       
+        <ul >
+
+          <li><a routerLink="/cart"><img id='headerImage' src="../assets/images/cart.JPG" > {{totallCart.result}}</a></li>
+          <div *ngIf='signInTrigger;then thenBlock; else elseBlock'></div>
+          <ng-template #thenBlock>          
+          <li  >{{user.nick}}</li> 
+          <li (click)='showHiddenSignOut()' ><a > <img id='headerImage' src="../assets/images/signout.JPG" >Sign Out</a></li>         
+          </ng-template>
+          <ng-template #elseBlock>
+            <li (click)='showHiddenSignIn()' ><a ><img id='headerImage' src="../assets/images/signin.JPG" > Sign in</a></li>
+            <li (click)='showHiddenSignUp()'><a ><img id='headerImage' src="../assets/images/signup.JPG" > Sign up</a></li>
+          </ng-template>
+        </ul>
+        
+      </div>
+    </div>
+    <!-- / container -->
+  </header>
+  <!-- / header -->
+
+  <nav id="menu">
+    <div class="container">
+      <div class="trigger"></div>
+      <ul id="blackFont">
+        <li><a href="" id="blackFont" >Home</a></li>
+        <li><a routerLink="/shop">Shop</a></li>
+        <li><a routerLink="/cart">Cart</a></li>
+        <li><a routerLink="/admin/list">admin</a></li>
+      </ul>
+    </div>
+    <!-- / container -->
+  </nav>
+  <!-- / navigation -->
+
+  <!-- / body -->
+<div *ngIf='signInObject.trigger'>
+  
+  <div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close" (click)='showHiddenSignIn()'>&times;</span>
+    <h2><p id='title'>Please Sign In to Shop Buy All</p></h2>
+    <form class="example-form">
+
+      <mat-form-field class="example-full-width" id='input'>
+         <input matInput [(ngModel)]='signInObject.userObj.email' type="email" placeholder="Input your Email"   name="email" value="">
+                         
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" id='input'>         
+         <input matInput [(ngModel)]='signInObject.userObj.password' type="password" placeholder="Input Password"  name="inputPassword" value="" autocomplete="section-blue shipping email-address">                 
+      </mat-form-field>
+    
+      <button id='submitSignIn' class="submitButton" (click)="signIn(signInObject)">Sign In</button>
+      <button id='submitSignInFacebook' class="submitButton" (click)="signIn('facebook')">Sign In with Facebook</button>
+      <button id='submitSignInGoogle' class="submitButton" (click)="signIn('google')">Sign In with Google+</button>
+    </form>
+  </div>
+
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+</div>
+<div *ngIf='signUpObject.trigger'>
+  
+  <div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div  id="modalSignUp" >
+    <span class="close" (click)='showHiddenSignUp()'>&times;</span>
+    <h2><p id='title'>Please Sign Up in Shop Buy All</p></h2>
+
+    <form class="example-form" id='signUpForm'>
+      <mat-form-field class="example-full-width" id='input'>
+         <input matInput [(ngModel)]='signUpObject.userObj.nick' type="text" placeholder="Input your unique Nickname"   name="nick" (ngModelChange)="onChangeNickname(signUpObject.userObj.nick)">        
+                         
+      </mat-form-field>
+      <div *ngIf='nickWarningTrigger' id="warning">Your Nickname is Not Unique, please change</div>
+      <mat-form-field class="example-full-width" id='input'>
+         <input matInput [(ngModel)]='signUpObject.userObj.email' type="email" placeholder="Input your email address" validation  name="email" (ngModelChange)="onChangeEmail(signUpObject.userObj.email)">
+                         
+      </mat-form-field>
+      <div *ngIf='emailWarningTrigger' id="warning">This Email is already registered></div>
+      <mat-form-field class="example-full-width" id='input'>       
+         <input matInput [(ngModel)]='signUpObject.userObj.password' autocomplete="section-blue shipping password" type="password" placeholder="Password must be more than 8 characters"  name="password" minlength="8">                 
+      </mat-form-field>
+      <mat-form-field class="example-full-width" id='input'>
+         
+         <input matInput [(ngModel)]='signUpObject.userObj.confirmPassword' autocomplete="section-blue shipping confirmPassword" type="password" placeholder="Confirm Password"  name="confirmPassword" (ngModelChange)="onChangePassword(signUpObject.userObj.confirmPassword)">                 
+      </mat-form-field>
+      <div *ngIf='passwordWarningTrigger' id="warning">Please Confirm password. Password does not match</div>
+      <mat-form-field class="example-full-width" id='input'>
+         
+         <input matInput [(ngModel)]='signUpObject.userObj.phone' type="phone" placeholder="Input your phone number"  name="phone" (ngModelChange)="onChangePhone(signUpObject.userObj.phone)">                 
+      </mat-form-field>
+      <div *ngIf='phoneWarningTrigger' id="warning">This Phone number is already registered</div><br>
+      <button id='submitSignUp' class="submitButton" (click)="signUp(signUpObject.userObj)">Sign Up</button>
+    </form>
+    
+    
+  </div>
+</div>
+</div>
+
+<div *ngIf='signOutTrigger'>
+  
+  <div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-contentOut">
+    <span class="close" (click)='showHiddenSignOut()'>&times;</span>
+    <h2><p id='titleOut'>Are you really want Sign Out from your account?</p></h2><br>
+    
+      <button id='submitSignUp' class="submitButton" (click)="signOut()">Sign Out</button>
+    
+  </div>
+</div>
+</div>
+
+<router-outlet></router-outlet>
+
+  
+  <footer id="footer">
+    <div class="container">
+      <div class="cols">
+        <div class="col">
+         <!-- <h3>Frequently Asked Questions</h3>
+          <ul>
+            <li><a href="#">Fusce eget dolor adipiscing </a></li>
+            <li><a href="#">Posuere nisl eu venenatis gravida</a></li>
+            <li><a href="#">Morbi dictum ligula mattis</a></li>
+            <li><a href="#">Etiam diam vel dolor luctus dapibus</a></li>
+            <li><a href="#">Vestibulum ultrices magna </a></li>
+          </ul>-->
+          <h3>Please contact us!</h3>
+          <p>We are always happy for new business partners</p>
+        </div>
+        <div class="col media">
+         <!-- <h3>Social media</h3>
+          <ul class="social">
+            <li><a href="#"><span class="ico ico-fb"></span>Facebook</a></li>
+            <li><a href="#"><span class="ico ico-tw"></span>Twitter</a></li>
+            <li><a href="#"><span class="ico ico-gp"></span>Google+</a></li>
+            <li><a href="#"><span class="ico ico-pi"></span>Pinterest</a></li>
+          </ul>-->
+        </div>
+        <div class="col contact">
+          <h3>Contact us</h3>
+          <p>BUY ALL<br>Keletska street<br>Ukraine, Vinnitsa</p>
+          <p><span class="ico ico-em"></span>buyall@gmail.com</p>
+          <p><span class="ico ico-ph"></span>(+380) 978 126 807</p>
+        </div>
+        <div class="col newsletter">
+          
+          <!--<form action="#">
+            <input type="text" placeholder="Your email address...">
+            <button type="submit"></button>
+          </form>-->
+        </div>
+      </div>
+      <p class="copy" style="text-align: center;">BUY ALL</p>
+    </div>
+    <!-- / container -->
+  </footer>
+
+ 
+
+  
+</div>
+
+
+
+
+
 

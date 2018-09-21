@@ -1,0 +1,195 @@
+<div id="breadcrumbs">
+		<div class="container">
+			<ul>
+				<li><a href="#" style="color: white">Home</a></li>
+				<li>Product results</li>
+				<li *ngIf="selectedCategory">{{selectedCategory}}</li>
+				<li *ngIf="selectedSubCategory">{{selectedSubCategory}}</li>
+				
+			</ul>
+		</div>
+		<!-- / container -->
+</div>
+	<!-- / body -->
+
+	<div id="body">
+		<div class="container">
+			
+			<div class="pagination" *ngIf='buttonFilterTrigger'>
+
+				
+				<ul>
+					<li><a ><span class="ico-prev" (click)='previousPage()'></span></a></li>
+					<li class="{{page.class}}" *ngFor='let page of getedProductsInPages.arrays' ><a (click)='changePagePerNumber(page.name)'>{{page.name}}</a></li>
+					
+					<li><a ><span class="ico-next" (click)='nextPage()'></span></a></li>
+				</ul>
+				<br>
+				
+
+			</div>
+
+			
+
+			<div class="products-wrap">						
+						
+					<!--<form class="example-form" *ngIf="selectedSubCategoryTrigger">
+						<mat-form-field class="example-full-width">
+			    			<input matInput [(ngModel)]='searchInput'  placeholder="Search"  class="validate" [ngModelOptions]="{standalone: true}">
+			  			</mat-form-field>
+			  			
+			  		</form>-->
+
+			  		
+
+
+				<aside id="sidebar">
+						
+					<div class="widget"  >
+							<h3>Select Category</h3>
+							<mat-form-field  >								
+								<mat-select  [(ngModel)]='selectedCategory' class="custom-select custom-select-sm mb-4" name="first" (ngModelChange)="onChangeCategory(selectedCategory)">							  
+								  <mat-option *ngFor="let category of categories" [value]="category.value" id='category'>
+								    {{category.value}}
+								  </mat-option>							  
+							</mat-select>
+						</mat-form-field>
+					</div>
+					<div class="widget"  *ngIf='subCategoriesTrigger'>
+							<h3>Select sub Category</h3>
+							<mat-form-field  >								
+								<mat-select  [(ngModel)]='selectedSubCategory' class="custom-select custom-select-sm mb-3" name="first" (ngModelChange)="onChangeSubCategory(selectedSubCategory)">							  
+								  <mat-option *ngFor="let subCategory of subCategories" [value]="subCategory.value" id='category'>
+								    {{subCategory.value}}
+								  </mat-option>							  
+							</mat-select>
+						</mat-form-field>
+					</div>
+
+
+					<div class="widget"  *ngIf='buttonFilterTrigger'>
+							<h3>Select count of Products per Page</h3>
+							<mat-form-field  >								
+								<mat-select  [(ngModel)]='getedProductsInPages.numberOfProductsOnPage' class="custom-select custom-select-sm mb-3" name="first" (ngModelChange)="selectNumberOfProductsPerPage()">							  
+								  <mat-option *ngFor="let option of getedProductsInPages.examplesNumbersOfProducts" [value]="option" id='category'>
+								    {{option}}
+								  </mat-option>							  
+							</mat-select>
+						</mat-form-field>
+					</div>
+
+					<div class="widget"  *ngIf='buttonFilterTrigger'>
+							<h3>Sort Products</h3>
+							<mat-form-field  >								
+								<mat-select  [(ngModel)]='getedProductsInPages.sortingCurrent' class="custom-select custom-select-sm mb-3" name="first" (ngModelChange)="sortingProducts()">							  
+								  <mat-option *ngFor="let option of getedProductsInPages.sortingArray" [value]="option" id='category'>
+								    {{option}}
+								  </mat-option>							  
+							</mat-select>
+						</mat-form-field>
+					</div>
+
+
+					<div *ngIf='buttonFilterTrigger'>
+					
+
+
+
+						<div class="widget" *ngFor='let option of filterOptions.fields'>
+										
+							<div *ngIf='filterOptions.objects[option].type;then thenBlock; else elseBlock'></div>
+
+
+							<ng-template #thenBlock>
+
+								<h3>Choose Range of {{option}}</h3>					
+
+								
+
+									<div class="slidecontainer">
+
+									 	<div class="range-slider" >
+									 		<h3>Min range</h3>
+										  <input class="range-slider__range" id="myRange" type="range"  step="0.1" [(ngModel)]='filterOptions.objects[option].currentMin'  min="{{filterOptions.objects[option].min}}" max="{{filterOptions.objects[option].currentMax}}">
+										  <span class="range-slider__value">{{filterOptions.objects[option].currentMin}}</span>
+										</div>	
+										<div class="range-slider" >
+									 		<h3>Max range</h3>
+										  <input class="range-slider__range" id="myRange" type="range" step="0.1" [(ngModel)]='filterOptions.objects[option].currentMax'  min="{{filterOptions.objects[option].currentMin}}" max="{{filterOptions.objects[option].max}}">
+										  <span class="range-slider__value">{{filterOptions.objects[option].currentMax}}</span> 
+									</div>
+
+								</div>				 	
+							  						  
+							</ng-template>
+
+							<ng-template #elseBlock>
+
+								<h3>Choose {{option}}</h3>		
+							
+								<div *ngFor='let value of filterOptions.objects[option].names '>							
+								<mat-checkbox [(ngModel)]='value.trigger' color='succces'><h3>{{value.name}}</h3></mat-checkbox>					
+								
+								</div>							
+
+
+							</ng-template>
+
+							 
+						</div>
+
+						
+							
+						<div class="widget" >						
+							<button mat-button  id="useFilter" (click)="useFilter()">Use Filter</button>
+						</div>
+
+					</div>
+				</aside>
+				<div id="content">
+					<div id="welcomeInShopDiv" *ngIf='welcomeInShop'>	
+						<div >
+							<!--<br>
+							
+							<h2   id="welcomeInShop" >Welcome in the Shop Buy All!</h2>
+							<br>
+							<br>
+							<h4 id="welcomeInShopSubTitle"> Please Select Categories of Products</h4>-->
+
+							<img src="./assets/images/shop2.jpg" id="welcomeInShopDivImage">
+						</div>
+					</div>
+					
+					<section class="products">
+						<article *ngFor='let prod of getedProduction' id='cart' >
+							<a  routerLink='/product/{{technicalNameSelectedCategory}}/{{technicalNameSelectedSubCategory}}/{{prod.title}}'><div ><img id="cartImage" [src]="prod.image" alt=""></div></a>
+							<div id="titleProduct" ><a routerLink='/product/{{technicalNameSelectedCategory}}/{{technicalNameSelectedSubCategory}}/{{prod.title}}' >{{prod.title}}<br>{{prod.description}}</a></div>
+							<h5 ><a routerLink='/product/{{technicalNameSelectedCategory}}/{{technicalNameSelectedSubCategory}}/{{prod.title}}' id="costOfProduct">${{prod.cost}}</a></h5>
+							<a class="btn-add" (click)="addProductToCart(prod)" id="addProductToCart">Add to cart</a>
+						</article>
+						
+					</section>
+				</div>
+				<!-- / content -->
+			
+			</div>
+
+			
+					<div class="pagination" *ngIf='buttonFilterTrigger'>
+
+						
+						<ul>
+							<li><a ><span class="ico-prev" (click)='previousPage()'></span></a></li>
+							<li class="{{page.class}}" *ngFor='let page of getedProductsInPages.arrays' ><a (click)='changePagePerNumber(page.name)'>{{page.name}}</a></li>
+							
+							<li><a ><span class="ico-next" (click)='nextPage()'></span></a></li>
+						</ul>
+						<br>
+						
+
+					</div>
+			
+		</div>
+		<!-- / container -->
+	</div>
+	<!-- / body -->

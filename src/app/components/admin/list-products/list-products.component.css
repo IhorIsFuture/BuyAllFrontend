@@ -1,0 +1,149 @@
+#createDatabase{
+	background-color: #123ca5;
+	color: white;
+	width: 100%;
+}
+
+#textareaFromAdmin {
+	height: 88px;
+	width: 100%;
+}
+
+#shortTextareaFromAdmin {
+	height: 45px;
+	width: 100%;
+}
+
+#inputFromAdmin {
+	width: 100%;
+	height: 45px;
+}
+#textareaUpdateFromAdmin {
+	
+	height: 45px;
+	width: 58%;
+}
+
+
+
+
+
+#eachField {
+	margin-top: 6px;
+}
+
+#createFieldForCollectionFromAdmin {
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+	background-color: #258426;
+  	color:black;
+}
+
+#createFieldForCollectionFromAdminSameValue {
+	
+	background-color: #020d56;
+  	color:white;
+}
+
+#createFieldForCollectionFromAdminSameValue:hover {
+	
+	background-color: #455bef;
+  	color:black;
+}
+
+#deleteField {
+	background-color: #ba0104;
+ 	color: white;
+ 	width: 14%;
+ 	margin-left: 0.5%;
+
+}
+
+#deleteField:hover {
+	background-color: #f21554;
+ 	color: black;
+}
+
+#deleteFieldForCollaction {
+	background-color: #7f0103;
+ 	color: white;
+ 	width: 25%;
+ 	margin-left: 1%;
+ 	
+}
+
+#deleteFieldForCollaction:hover {
+	background-color: #f7070b;
+ 	color: black; 	
+ 	
+}
+
+.eachOptionOfProduct {
+	margin-top: 12px;
+	width: 100%;
+}
+
+
+#deleteFromAdmin {
+  background-color: #ba3327;
+  color: white;
+}
+
+#deleteFromAdmin:hover {
+  background-color: #e21b1e;
+  color: black;
+}
+
+#updateFromAdmin {
+  background-color: #073e7c;
+  color: white;
+}
+
+#updateFromAdmin:hover {
+  background-color: #2f84e2;
+  color:black;
+}
+
+#inputFromAdmin {
+  width: 80%;
+}
+
+#addFieldFromAdmin {
+  background-color: #034c06;
+  color:white;
+}
+
+#addFieldFromAdmin:hover {
+  background-color: #08890d;
+  color:black;
+}
+
+#createFieldFromAdmin {
+  background-color: #a09604;
+  color: white;
+}
+#createFieldFromAdmin:hover {
+  background-color: #e5d814;
+  color:black;
+}
+
+#deleteFieldFromAdmin {
+  background-color: #ba7403;
+  color: white;
+}
+
+#deleteFieldFromAdmin:hover {
+  background-color: #efb20b;
+  color: black;
+}
+
+#submitDeleteFieldForCollaction {
+	width: 60%;
+	margin-top: 14px;
+}
+
+#inputPassword {
+	margin-bottom: 5px;
+	width: 100%
+}

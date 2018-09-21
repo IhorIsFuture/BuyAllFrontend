@@ -1,0 +1,52 @@
+#selectQuantity {
+	width: 40%;
+	margin-left: 30%;
+	color: black;
+	margin-
+	background-color: white;
+	color: black;
+	font-color: black;
+
+}
+.custom-select{
+	text-align: center;
+	background-color: grey;
+	color: black;
+	font-color: black;
+}
+
+#blackFont {
+	color:black;
+}
+
+#buttonFinalizePay {
+	background-color: #638e34;
+	color: white;
+}
+
+#buttonFinalizePay:hover {
+	background-color: #529907;
+	color: white;
+}
+
+.choosingQuantity {
+	background-color: #1f7006;
+}
+
+.choosingQuantity:hover {
+	background-color: #3e9b22;
+}
+
+#deleteProductFromCart {
+	background-color: #af1111;
+	color: white;
+}
+
+#deleteProductFromCart:hover {
+	background-color: #e81717;
+	color: white;
+}
+
+#trCartTable {
+	background-color: #286814;
+};

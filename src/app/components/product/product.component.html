@@ -1,0 +1,68 @@
+<div id="breadcrumbs">
+		<div class="container">
+			<ul>
+				<li><a href="#" style="color: white">Home</a></li>
+				<li>Product</li>
+				<li style="font-size: 15px;">{{product.title}}</li>
+				
+				
+			</ul>
+		</div>
+		<!-- / container -->
+</div>
+
+<div id="body">
+		<div class="container">
+			<div id="content" class="full">
+				<div class="product">
+					<div class="image">
+						<img src="{{product.image}}" alt="">
+					</div>
+					<div class="details">
+						<h1 id="colorFontBlack">{{product.title}}</h1>
+						<h4 id="colorFontBlack">${{product.cost}}</h4>
+						<div class="entry">
+							<p id="colorFontBlack">{{product.shortDescription}}</p>
+							<div class="tabs">
+								<div class="nav">
+									<ul>
+										
+											<li  *ngFor='let place of placeSpecifications.places' class="{{place.class}}" ><a  (click)='changePlaceSpecifications(place)' id="colorFontBlack">{{place.name}}</a></li>
+										
+									</ul>
+								</div>
+								<div class="tab-content {{placeSpecifications.places[0].trigger}}" id="desc" >
+									<p id="colorFontBlack">{{product.description}}</p>
+								</div>
+								<div class="tab-content {{placeSpecifications.places[1].trigger}}" id="spec" >
+									<p id="colorFontBlack">{{product.company}}</p>
+								</div>
+								<div class="tab-content {{placeSpecifications.places[2].trigger}}" id="ret" >
+									<p *ngFor='let option of product.fields' id="colorFontBlack">
+										{{option}} : {{product[option]}}
+										<br>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="actions">
+							<label style="color: black;">Quantity:</label> 
+							<mat-form-field  id='mat-form' >								
+								<mat-select  [(ngModel)]='product.quantity' id='selectQuantity'  name="first"  (ngModelChange)="changeQuantityOfProduct(product)" >							  
+								  <mat-option *ngFor="let option of quantityArray" [value]="option" >
+								    {{option}}
+								  </mat-option>							  
+							</mat-select>
+						</mat-form-field>
+						   Total Cost : ${{product.cost * product.quantity}}
+							<a  class="btn-grey" id="buttonAddToCart" (click)='addProductToCart(product)'>Add to cart</a>
+						
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- / content -->
+		</div>
+		<!-- / container -->
+	</div>
+	<!-- / body -->

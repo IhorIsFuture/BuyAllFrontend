@@ -1,0 +1,37 @@
+#selectQuantity {
+	
+	margin-top: 0px;
+	color: green;
+	font-color: green;
+	
+	background-color: #638e34;
+	
+
+}
+
+#mat-form {
+	width: 10%; 
+	height: 0px; 
+	margin-left: 5px; 
+	margin-top: -15px; 
+	margin-bottom: 0px; 
+	background-color: black;
+}
+
+.actions {
+	color: black;
+}
+
+#colorFontBlack {
+	color: black;
+}
+
+#buttonAddToCart {
+	background-color: #638e34;
+	color: white;
+}
+
+#buttonAddToCart:hover {
+	background-color: #529907;
+	color: white;
+}

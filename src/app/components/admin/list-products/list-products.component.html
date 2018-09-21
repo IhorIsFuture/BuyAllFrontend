@@ -1,0 +1,322 @@
+<div id="breadcrumbs">
+		<div class="container">
+			<ul>
+				<li><a href="#" style="color: white">Home</a></li>
+				<li>Admin panel</li>
+				<li *ngIf="selectedCategory">{{selectedCategory}}</li>
+				<li *ngIf="selectedSubCategory">{{selectedSubCategory}}</li>
+				
+			</ul>
+		</div>
+		<!-- / container -->
+	</div>
+
+
+<div id="body">
+	<div class="container">
+
+		<div class="pagination">
+			
+				
+		</div>
+		<div class="products-wrap" >
+			<form class="example-form" *ngIf="selectedSubCategoryTrigger">
+				<mat-form-field class="example-full-width">
+	    			<input matInput [(ngModel)]='searchInput'  placeholder="Search"  class="validate" [ngModelOptions]="{standalone: true}">
+	  			</mat-form-field>
+	  			{{getedProduction.length}}
+	  		</form>
+		<aside id="sidebar" >
+							
+							<div class="widget">
+								<button mat-button  id="createDatabase" (click)="createDatabase()">Create new Category</button>
+	  							
+	  							<mat-form-field class="example-full-width" *ngIf='createDatabaseTrigger'>
+	    								<input matInput [(ngModel)]='nameNewCategory'  placeholder="Name Category"  id="inputPassword" [ngModelOptions]="{standalone: true}">
+	    								
+	    						</mat-form-field>
+	    						<mat-form-field class="example-full-width" *ngIf='createDatabaseTrigger'>		
+	    								<input matInput [(ngModel)]='namefirstCollection'  placeholder="Name sub Category"  id="inputPassword" [ngModelOptions]="{standalone: true}">
+	    								<br>
+	    								<br>
+	    								<mat-divider></mat-divider>
+	    								<button mat-button  id="inputPassword" style="background-color: yellow;" (click)="addDatabase(nameNewCategory, namefirstCollection)">Add</button>
+	  							</mat-form-field>	
+							</div>
+
+							<div class="widget"   >
+									Select Category
+									<mat-form-field  >								
+										<mat-select  [(ngModel)]='selectedCategory' class="custom-select custom-select-sm mb-3" name="first" (ngModelChange)="onChangeCategory(selectedCategory)">							  
+										  <mat-option *ngFor="let category of categories" [value]="category.value" id='category'>
+										    {{category.value}}
+										  </mat-option>							  
+									</mat-select>
+								</mat-form-field>
+							</div>
+
+							<div class="widget"  *ngIf='subCategoriesTrigger'>
+								<button mat-button  id="deleteDatabase" (click)="deleteDatabase()">Delete {{selectedCategory}} </button>
+
+									<mat-form-field class="example-full-width" *ngIf='deleteDatabaseTrigger'>
+	    								<input matInput [(ngModel)]='adminPasswordForDatabase'  placeholder="Password"  id="inputPassword" [ngModelOptions]="{standalone: true}">
+	    								<br>
+	    								<mat-divider></mat-divider>
+	    								<button mat-button  id="inputPassword" style="background-color: yellow;" (click)="submitDeleteDatabase(adminPasswordForDatabase, technicalNameSelectedCategory )">Submit</button>
+	  								</mat-form-field>	
+								
+								
+							</div>
+
+
+							<dir class="widget">
+								<button mat-button  id="createDatabase" (click)="createCollection()" *ngIf='subCategoriesTrigger'>Create sub Category</button>
+								
+
+								<mat-form-field class="example-full-width" *ngIf='createCollectionTrigger'>		
+	    								<input matInput [(ngModel)]='nameNewCollection'  placeholder="Name sub Category"  id="inputPassword" [ngModelOptions]="{standalone: true}">
+	    								<br>
+	    								<br>
+	    								<mat-divider></mat-divider>
+	    								<button mat-button  id="inputPassword" style="background-color: yellow;" (click)="addCollection(technicalNameSelectedCategory, nameNewCollection)">Add</button>
+	  							</mat-form-field>
+							</dir>
+
+							<div class="widget"  *ngIf='subCategoriesTrigger'>
+								
+									Select sub Category
+									<mat-form-field  >								
+										<mat-select  [(ngModel)]='selectedSubCategory' class="custom-select custom-select-sm mb-3" name="first" (ngModelChange)="onChangeSubCategory(selectedSubCategory)">							  
+										  <mat-option *ngFor="let subCategory of subCategories" [value]="subCategory.value" id='category'>
+										    {{subCategory.value}}
+										  </mat-option>							  
+									</mat-select>
+								</mat-form-field>
+							</div>
+
+							
+
+
+							<div class="widget" *ngIf='selectedSubCategoryTrigger' >
+								
+								<button mat-button   id="deleteDatabase" (click)="deleteCollection()">Delete {{selectedSubCategory}}</button>
+
+								<mat-form-field class="example-full-width" *ngIf='deleteCollectionTrigger'>
+	    								<input matInput [(ngModel)]='adminPasswordForCollection'  placeholder="Password"  id="inputPassword" [ngModelOptions]="{standalone: true}">
+	    								<br>
+	    								<mat-divider></mat-divider>
+	    								<button mat-button  id="inputPassword" style="background-color: yellow;" (click)="submitDeleteCollection(adminPasswordForCollection, technicalNameSelectedCategory, technicalNameSelectedSubCategory )">Submit</button>
+	  							</mat-form-field>
+									
+								
+							</div>	
+							<div class="widget" *ngIf='selectedSubCategoryTrigger'>
+								<button mat-button  id="createDatabase" (click)="createProduct()" >Create new Product</button>
+							</div>
+
+
+			</aside>
+			<div id="content">
+
+					<div *ngIf='newProductTrigger'>
+						<br>
+						<mat-accordion >
+						  <mat-expansion-panel>
+						    <mat-expansion-panel-header>
+						      <mat-panel-title>
+						      	 
+						        <br>
+						       
+						      </mat-panel-title>
+						      <mat-panel-description>
+						       NEW PRODUCT
+						        
+						        
+						      </mat-panel-description>
+						      
+						    </mat-expansion-panel-header>
+
+						    <div  id="inputFromAdmin">
+							    <mat-form-field id="inputFromAdmin">
+							      <input matInput placeholder="title"[(ngModel)]='createdProduct.title' name="title" id="inputFromAdmin">						      
+							    </mat-form-field>							    							    
+							    <br>
+						    </div>
+						    <br>
+						    <div  id="inputFromAdmin">
+							    <mat-form-field id="inputFromAdmin">
+							      <input matInput placeholder="company"[(ngModel)]='createdProduct.company' name="company" id="inputFromAdmin">						      
+							    </mat-form-field>							    							    
+							    <br>
+						    </div>
+						    <br>
+						    <div  id="inputFromAdmin">
+							    <mat-form-field id="inputFromAdmin">
+							      <input matInput placeholder="rating"[(ngModel)]='createdProduct.rating' name="rating" id="inputFromAdmin">						      
+							    </mat-form-field>							    							    
+							    <br>
+						    </div>
+						    <br>
+						    <div  id="inputFromAdmin">
+							    <mat-form-field id="inputFromAdmin">
+							      <input matInput placeholder="colors"[(ngModel)]='createdProduct.colors' name="colors" id="inputFromAdmin">						      
+							    </mat-form-field>							    							    
+							    <br>
+						    </div>
+						    <br>
+						    <div  id="inputFromAdmin">
+							    <mat-form-field id="inputFromAdmin">
+							      <textarea matInput placeholder="shortDescription"[(ngModel)]='createdProduct.shortDescription' name="shortDescription" id="shortTextareaFromAdmin" (ngModelChange)='onChangeShortDescription(createdProduct.shortDescription)'></textarea>							      
+							    </mat-form-field>							    							    
+							    <br>
+						    </div>
+						    <br>
+						    <div  id="inputFromAdmin">
+							    <mat-form-field id="inputFromAdmin">
+							      <textarea matInput placeholder="description"[(ngModel)]='createdProduct.description' name="description" id="textareaFromAdmin" (ngModelChange)='onChangeDescription(createdProduct.description)'></textarea>						      
+							    </mat-form-field>							    							    
+							    
+						    </div>
+						    <br>
+						    <br>
+						    <br>
+						    
+						    <div  id="inputFromAdmin">
+							    <mat-form-field id="inputFromAdmin">
+							      <input matInput placeholder="image"[(ngModel)]='createdProduct.image' name="image" id="inputFromAdmin" >						      
+							    </mat-form-field>							    							    
+							    <br>
+						    </div>
+						    <br>
+						    <div  id="inputFromAdmin">
+							    <mat-form-field id="inputFromAdmin">
+							      <input matInput placeholder="cost"[(ngModel)]='createdProduct.cost' name="cost" id="inputFromAdmin">						      
+							    </mat-form-field>							    							    
+							    <br>
+						    </div>
+						    <br>
+						    
+						    <br>
+
+						    <div *ngIf='newFieldTrigger'>
+						    	<mat-form-field id="inputFromAdmin">
+							      <input matInput placeholder="Name of Option" [(ngModel)]='newFieldName' name="newFieldName" id="inputFromAdmin">				    
+							    </mat-form-field>
+							    <br>
+							    <mat-form-field id="inputFromAdmin">
+							      <input matInput placeholder="Value of Option" [(ngModel)]='newFieldValue' name="newFieldValue" id="inputFromAdmin">				    
+							    </mat-form-field>
+							    <br>
+							    
+							      <button mat-button  id="createFieldFromAdmin" (click)="createFieldFromAdmin(product)">Create Field</button>
+							      <button mat-button  id="createFieldForCollectionFromAdmin" (click)="createFieldForCollectionFromAdmin(product)">Create Field For sub Category </button>
+							      <button mat-button  id="createFieldForDatabaseFromAdmin" (click)="createFieldForDatabaseFromAdmin(product)">Create Field For Category </button>				    
+							    
+							</div>
+							<br>      
+							      <button mat-button  id="addFieldFromAdmin" (click)="addFieldFromAdmin(product)">{{nameAddButton}}</button>
+							      <button mat-button  id="updateFromAdmin" (click)="addNewProduct(createdProduct)">ADD</button>
+						    
+						      
+						    
+						  <br>
+						 
+						  </mat-expansion-panel>
+						  <br>
+						</mat-accordion>
+						
+						
+					</div>
+
+
+
+
+
+					<div *ngIf='selectedSubCategoryTrigger'>
+						<br>
+						<mat-accordion *ngFor='let product of getedProduction | search: searchInput' >
+						  <mat-expansion-panel>
+						    <mat-expansion-panel-header>
+						      <mat-panel-title>
+						      	<img src='{{product.image}}' id="adminImage">
+						        {{product.title}}  
+						        <br>
+						        ${{product.cost}}
+						      </mat-panel-title>
+						      <mat-panel-description>
+						        Select this product
+						        
+						        
+						      </mat-panel-description>
+						      <mat-action-row>
+   									 <button mat-button  id="deleteFromAdmin" (click)="deleteFromAdmin(product)">Delete</button>
+ 							  </mat-action-row>
+						    </mat-expansion-panel-header>
+
+						    <div *ngFor='let key of product.fields' id="inputFromAdmin" id='eachField'>
+
+							    <mat-form-field id="inputFromAdmin" *ngIf='disabledOptions[key]' class='eachOptionOfProduct'>
+							      <textarea matInput placeholder="{{key}}"[(ngModel)]='product[key]' name="key" id="textareaUpdateFromAdmin" (ngModelChange)='onChangeUpdateInput(product[key], key)'></textarea>
+							     <button mat-button  id="deleteField" (click)="deleteField(key, product)">Delete Field</button>
+							     <button mat-button  id="deleteFieldForCollaction" (click)="deleteFieldForCollection(key)">Delete For sub Category</button>
+							    </mat-form-field>
+							    <br>
+							    <div *ngIf='deleteFieldForCollactionTrigger[key]' id="submitDeleteFieldForCollaction">
+							    	<mat-form-field class="example-full-width" id="inputPassword">
+		    								<input matInput [(ngModel)]='adminPasswordForDeleteField'  placeholder="Password"  id="inputPassword" [ngModelOptions]="{standalone: true}">
+		    								<br>
+		    								<mat-divider></mat-divider>
+		    								<button mat-button  id="inputPassword" style="background-color: yellow;" (click)="sumbitDeleteFieldForCollection(key)">Submit</button>
+		  							</mat-form-field>
+						   		</div>
+							    
+						    </div>
+
+						     
+						   
+						    <br>
+						    <div *ngIf='newFieldTrigger'>
+						    	<mat-form-field id="inputFromAdmin">
+							      <input matInput placeholder="Name of Option" [(ngModel)]='newFieldName' name="newFieldName" id="inputFromAdmin">				    
+							    </mat-form-field>
+							    <br>
+							    <br>
+							    <mat-form-field id="inputFromAdmin">
+							      <input matInput placeholder="Value of Option" [(ngModel)]='newFieldValue' name="newFieldValue" id="inputFromAdmin">				    
+							    </mat-form-field>
+							    <br>
+							    
+							      <button mat-button  id="createFieldFromAdmin" (click)="createFieldFromAdmin(product)">Create Field For {{product.title}}</button>
+							      <button mat-button  id="createFieldForCollectionFromAdmin" (click)="createFildForSubCategory(product)">Create Field For {{selectedSubCategory}} </button>
+
+							      <button mat-button  id="createFieldForCollectionFromAdminSameValue" (click)="createFildForSubCategorySameValue()">Create Field For {{selectedSubCategory}} with the Same Value</button>
+							     <!-- <button mat-button  id="createFieldForDatabaseFromAdmin" (click)="createFieldForDatabaseFromAdmin(product)">Create Field For Category </button>-->				    
+							    
+							</div>
+							<br>      
+							      <button mat-button  id="addFieldFromAdmin" (click)="addFieldFromAdmin(product)">{{nameAddButton}}</button>
+							      <button mat-button  id="updateFromAdmin" (click)="updateFromAdmin(product)">Update</button>
+						    
+						      
+						    
+						  <br>
+						 
+						  </mat-expansion-panel>
+						  <br>
+						</mat-accordion>
+						
+						
+					</div>
+		
+			</div>
+
+		
+
+	</div>
+</div>		
+
+
+
+
+
+
